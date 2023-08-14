@@ -50,6 +50,9 @@ btn8.grid(row=2, column=1, sticky="we")
 btn9 = tk.Button(buttonframe, text="9", font=fontText)
 btn9.grid(row=2, column=2, sticky="we")
 
+btn10 = tk.Button(buttonframe, text="10", font=fontText)
+btn10.grid(row=3, column=0, columnspan=3, sticky="we")
+
 buttonframe.pack(fill="x")
 
 button = tk.Button(root, text="Touch me", font=fontText)
