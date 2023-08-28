@@ -1,7 +1,7 @@
 import json
-import requests
+import requests as r
 
-r = requests
+#r = requests
 
 menu = '''
 1. Dad joke
@@ -32,8 +32,9 @@ while True:
             url = "https://api.agify.io/?name=" + name
             request = r.get(url)
             jsonResponse = request.json()
-            for key, value in jsonResponse.items():
-                print(f"{key}: {value}")
+            #for key, value in jsonResponse.items():
+            #    print(f"{key}: {value}")
+            print("Based on the name " + name + " the person should be " + str(jsonResponse["age"]) + " years old.")
         elif userAnswer == 4:
             url = "https://api.chucknorris.io/jokes/random"
             request = r.get(url)
