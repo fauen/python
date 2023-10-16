@@ -1,7 +1,7 @@
 import requests as r
 import json
 
-asanaBearerToken = "1/1201928077587569:da557829541049ed0f1a709df632df41"
+asanaBearerToken = ""
 
 asanaHeaders = {
     'Authorization': 'Bearer ' + asanaBearerToken,
