@@ -34,41 +34,42 @@ while True:
             asanaTeams = r.get("https://app.asana.com/api/1.0/workspaces/" + asanaGid + "/teams", headers=asanaHeaders)
             asanaTeamsJson = json.loads(asanaTeams.text)
             asanaTeamsData = asanaTeamsJson['data']
-            for item in range(len(asanaTeamsData)):
-                print(asanaTeamsData[item])
+            for item in asanaTeamsData:
+                print(item['gid'] + " - " + item['name'])
         elif userAnswer == 3:
             asanaTeam = input("Input team ID: ")
             asanaProjects = r.get("https://app.asana.com/api/1.0/teams/" + asanaTeam + "/projects", headers=asanaHeaders)
             asanaProjectsJson = json.loads(asanaProjects.text)
             asanaProjectsData = asanaProjectsJson['data']
-            for item in range(len(asanaProjectsData)):
-                print(asanaProjectsData[item])
+            for item in asanaProjectsData:
+                print(item['gid'] + " - " + item['name'])
         elif userAnswer == 4:
             asanaProject = input("Input project ID: ")
             asanaAllTasks = r.get("https://app.asana.com/api/1.0/tasks?project=" + asanaProject, headers=asanaHeaders)
             asanaAllTasksJson = json.loads(asanaAllTasks.text)
             asanaAllTasksData = asanaAllTasksJson['data']
-            for item in range(len(asanaAllTasksData)):
-                print(asanaAllTasksData[item])
+            for item in asanaAllTasksData:
+                print(item['gid'] + " - " + item['name'])
         elif userAnswer == 5:
             asanaProject = input("Input project ID: ")
             asanaSections = r.get("https://app.asana.com/api/1.0/projects/" + asanaProject + "/sections", headers=asanaHeaders)
             asanaSectionsJson = json.loads(asanaSections.text)
             asanaSectionsData = asanaSectionsJson['data']
-            for item in range(len(asanaSectionsData)):
-                print(asanaSectionsData[item])
+            for item in asanaSectionsData:
+                print(item['gid'] + " - " + item['name'])
         elif userAnswer == 6:
             asanaSection = input("Input section ID: ")
             asanaTasks = r.get("https://app.asana.com/api/1.0/sections/" + asanaSection + "/tasks", headers=asanaHeaders)
             asanaTasksJson = json.loads(asanaTasks.text)
             asanaTasksData = asanaTasksJson['data']
-            for item in range(len(asanaTasksData)):
-                print(asanaTasksData[item])
+            for item in asanaTasksData:
+                print(item['gid'] + " - " + item['name'])
         elif userAnswer == 7:
             asanaTask = input("Input task ID: ")
             asanaFullTask = r.get("https://app.asana.com/api/1.0/tasks/" + asanaTask, headers=asanaHeaders)
             asanaFullTaskJson = json.loads(asanaFullTask.text)
-            asanaFullTaskData = asanaFullTaskJson['data']
-            print(asanaFullTaskData['custom_fields'])
+            asanaFullTaskData = asanaFullTaskJson['data']['custom_fields']
+            for item in asanaFullTaskData:
+                print(f"{item['name']}: {item['display_value']}")
         elif userAnswer == 0:
             break
