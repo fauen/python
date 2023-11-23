@@ -3,39 +3,43 @@ import tkinter as tk
 from pprint import pprint as pp
 
 def getSLinformation():
-    #key = keyInput.get()
-    #siteId = siteInput.get()
-    key = ""
-    siteId = ""
+    key = keyInput.get()
+    siteId = siteInput.get()
     url = f'https://api.sl.se/api2/realtimedeparturesV4.json?key={key}&siteid={siteId}&timewindow=30'
     getInfo = r.get(url)
     jsonData = getInfo.json()
     pyList = jsonData['ResponseData']['Metros']
-    print([dest for dest in pyList if(dest['Destination'] == '')])
-    #outputString.set(jsonData)
+    for dest in pyList:
+        if dest['Destination'] == '':
+            print(dest)
+            print(dest['DisplayTime'])
+            outputStringTime.set(dest['DisplayTime'])
+            if dest['Deviations'] != None:
+                outputStringDevi.set(dest['Deviations'])
     
-getSLinformation()
+window = tk.Tk()
 
-# window = tk.Tk()
+mainFrame = tk.Frame(window, padx=10, pady=10)
+mainFrame.pack()
+frameLabel = tk.LabelFrame(mainFrame, text="SL Departure")
+frameLabel.pack()
+keyLabel = tk.Label(mainFrame, text="Input key")
+keyLabel.pack()
+keyInput = tk.Entry(mainFrame)
+keyInput.pack()
+siteLabel = tk.Label(mainFrame, text="Input siteId")
+siteLabel.pack()
+siteInput = tk.Entry(mainFrame)
+siteInput.pack()
 
-# mainFrame = tk.Frame(window, padx=10, pady=10)
-# mainFrame.pack()
-# frameLabel = tk.LabelFrame(mainFrame, text="SL Departure")
-# frameLabel.pack()
-# keyLabel = tk.Label(mainFrame, text="Input key")
-# keyLabel.pack()
-# keyInput = tk.Entry(mainFrame)
-# keyInput.pack()
-# siteLabel = tk.Label(mainFrame, text="Input siteId")
-# siteLabel.pack()
-# siteInput = tk.Entry(mainFrame)
-# siteInput.pack()
+submitButton = tk.Button(mainFrame, text="Submit", command=getSLinformation)
+submitButton.pack()
 
-# submitButton = tk.Button(mainFrame, text="Submit", command=getSLinformation)
-# submitButton.pack()
+outputStringTime = tk.StringVar()
+outputLabel = tk.Label(mainFrame, textvariable=outputStringTime)
+outputLabel.pack()
+outputStringDevi = tk.StringVar()
+outputLabelDevi = tk.Label(mainFrame, textvariable=outputStringDevi)
+outputLabelDevi.pack()
 
-# outputString = tk.StringVar()
-# outputLabel = tk.Label(mainFrame, textvariable=outputString)
-# outputLabel.pack()
-
-# window.mainloop()
+window.mainloop()
