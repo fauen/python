@@ -1,10 +1,11 @@
-FROM python:latest
+FROM python:3.12-alpine
 
 WORKDIR /code
 
-COPY ./requirements.txt ./
+COPY . .
+
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY ./src ./src
+WORKDIR /code/src
 
-CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "80", "--reload"]
+CMD [ "python", "main.py" ]
