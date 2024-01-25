@@ -7,5 +7,6 @@ COPY . .
 RUN pip install --no-cache-dir -r requirements.txt
 
 WORKDIR /code/src
-
-CMD [ "python", "main.py" ]
+ARG dir
+ENTRYPOINT [ "python", "main.py" ]
+CMD [ dir ]
