@@ -1,0 +1,11 @@
+FROM python:3.12-alpine
+
+WORKDIR /code
+
+COPY . .
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+WORKDIR /code/src
+
+CMD [ "python", "MinecraftRandomSeed.py" ]
