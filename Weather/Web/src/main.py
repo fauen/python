@@ -1,11 +1,11 @@
 import requests as r
-from flask import Flask
+from flask import Flask, render_template, redirect, url_for
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='../www')
 
 @app.route('/')
 def home():
-    return '<h1>Amazing page</h1><a href="/weather">weather</a>'
+    return send_from_directory(app.static_folder, 'index.html')
 
 @app.route('/weather')
 def get_weather():
@@ -13,7 +13,7 @@ def get_weather():
     weather = weather.text
     return weather
 
-@app.route('/<name>')
+@app.route('/<name>', methods=['POST'])
 def get_specific_weather(name):
     weather = r.get(f'https://wttr.in/{name}?format=3')
     weather = weather.text
