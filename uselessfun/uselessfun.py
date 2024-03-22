@@ -1,55 +1,82 @@
-import json
 import requests as r
+import json
 
-#r = requests
+def Joke():
+    url = "https://icanhazdadjoke.com"
+    headers = {
+        'Accept': 'text/plain'
+    }
+    response = r.get(url=url, headers=headers)
+    print(response.text)
 
-menu = '''
-1. Dad joke
-2. Affirmation
-3. Guess age from name
-4. Chuck Norris fact
-5. Country facts
-6. Weather
-0. Quit
-'''
+def Affirmation():
+    url = "https://www.affirmations.dev"
+    response = r.get(url=url)
+    response = response.json()
+    print(response["affirmation"])
 
-while True:
-    print(menu)
-    userAnswer = input("Pick an option: ")
-    if userAnswer.isdigit():
-        userAnswer = int(userAnswer)
-        if userAnswer == 1:
-            url = "https://icanhazdadjoke.com"
-            headers = {"Accept": "text/plain"}
-            print((r.get(url, headers = headers).text))
-        elif userAnswer == 2:
-            url = "https://www.affirmations.dev"
-            request = r.get(url)
-            jsonResponse = request.json()
-            print(jsonResponse["affirmation"])
-        elif userAnswer == 3:
-            name = input("Input your name: ")
-            url = "https://api.agify.io/?name=" + name
-            request = r.get(url)
-            jsonResponse = request.json()
-            #for key, value in jsonResponse.items():
-            #    print(f"{key}: {value}")
-            print("Based on the name " + name + " the person should be " + str(jsonResponse["age"]) + " years old.")
-        elif userAnswer == 4:
-            url = "https://api.chucknorris.io/jokes/random"
-            request = r.get(url)
-            jsonResponse = request.json()
-            print(jsonResponse["value"])
-        elif userAnswer == 5:
-            name = input("Input country: ")
-            url = "https://restcountries.com/v3.1/name/" + name
-            request = r.get(url)
-            jsonResponse = request.json()
-            for key in jsonResponse:
-                print(json.dumps(key, indent=4))
-        elif userAnswer == 6:
-            url = "https://wttr.in"
-            request = r.get(url)
-            print(request.text)
-        elif userAnswer == 0:
-            quit()
+def Age():
+    name = input("Input name: ")
+    url = f"https://api.agify.io/?name={name}"
+    response = r.get(url=url)
+    response = response.json()
+    print(response["age"])
+
+def Chuck_Norris():
+    url = "https://api.chucknorris.io/jokes/random"
+    response = r.get(url=url)
+    response = response.json()
+    print(response["value"])
+
+def Country():
+    country = input("Input country name: ")
+    url = f"https://restcountries.com/v3.1/name/{country}"
+    response = r.get(url=url)
+    response = response.json()
+    print(json.dumps(response, indent=2))
+
+def Weather():
+    url = "https://wttr.in"
+    response = r.get(url=url)
+    response = response.text
+    print(response)
+
+def Menu():
+    print('''
+    1. Dad joke
+    2. Affirmation
+    3. Guess age from name
+    4. Chuck Norris fact
+    5. Country facts
+    6. Weather
+    0. Quit
+        ''')
+
+def main():
+    while True:
+        try:
+            Menu()
+            answer = input("Pick an option: ")
+            if not answer.isdigit():
+                print("\nThat's not a number silly...")
+            else:
+                answer = int(answer)
+                if answer == 1:
+                    Joke()
+                elif answer == 2:
+                    Affirmation()
+                elif answer == 3:
+                    Age()
+                elif answer == 4:
+                    Chuck_Norris()
+                elif answer == 5:
+                    Country()
+                elif answer == 6:
+                    Weather()
+                elif answer == 0:
+                    return
+        except KeyboardInterrupt:
+            return
+
+if __name__ == "__main__":
+    main()
