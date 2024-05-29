@@ -2,7 +2,7 @@ import requests as r
 import os
 
 def get_logo(company):
-    url = f"https://logo.clearbit.com/{company}.com?size=500"
+    url = f"https://logo.clearbit.com/{company}.com?size=512"
     response = r.get(url=url)
     output_dir = "logos"
     if not os.path.isdir(output_dir):
