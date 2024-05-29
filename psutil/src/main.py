@@ -1,6 +1,25 @@
 import psutil
 import platform
 
+def _menu():
+    menu = """
+    1. CPU
+    2. Memory
+    3. Disk
+    """
+    menu_list = [1, 2, 3]
+    while True:
+        print(menu)
+        option = input("Pick an option: ")
+        try:
+            if not option.isdigit() and menu_list:
+                print("Input the correct option.") 
+            else:
+                option = int(option)
+                return option
+        except KeyboardInterrupt:
+            quit
+
 def _cpu_info():
     cpu_usage = psutil.cpu_percent(interval=1)
     cpu_freq = psutil.cpu_freq()
@@ -30,4 +49,8 @@ def main():
     print(f"Disk usage: {int(_disk_info()[3] * 10)}%")
 
 if __name__ == "__main__":
-    main()
+    option = _menu()
+    if option == 1:
+        print(_cpu_info())
+
+    #main()
