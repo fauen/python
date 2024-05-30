@@ -3,7 +3,7 @@ from pprint import pprint as pp
 from os import getenv
 import requests as r
 
-load_dotenv('.env')
+load_dotenv('../.env')
 
 def get_current_weather(city="Stockholm"):
     url = f"https://api.openweathermap.org/data/2.5/weather?appid={getenv("API_KEY")}&q={city}&units=metric"

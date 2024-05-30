@@ -4,7 +4,7 @@ from flask import Flask, render_template, request
 from weather import get_current_weather
 from waitress import serve
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='../templates', static_folder='../static')
 
 @app.route('/')
 @app.route('/index')
