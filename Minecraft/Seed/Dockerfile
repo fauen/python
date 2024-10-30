@@ -4,8 +4,8 @@ WORKDIR /code
 
 COPY . .
 
-RUN pip install --no-cache-dir -r requirements.txt
+#RUN pip install --no-cache-dir -r requirements.txt
 
-WORKDIR /code/src
+WORKDIR /code
 
 CMD [ "python", "MinecraftRandomSeed.py" ]
