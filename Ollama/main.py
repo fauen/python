@@ -15,7 +15,7 @@ def main(prompt: str) -> None:
 if __name__ == "__main__":
     try:
         while True:
-            prompt = input("What is why bidding my mastah?\n")
+            prompt = input("\nWhat is thy bidding my mastah?\n")
             main(prompt)
     except KeyboardInterrupt:
         pass
