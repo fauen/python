@@ -25,6 +25,7 @@ def main():
     st.write([0, 1, 2, 3, 4])
 
     st.sidebar.title("Sidebar!")
+    st.sidebar.link_button(label="SL", url="https://sl.se")
     question = st.sidebar.text_input(label="Question for our overlords")
     st.sidebar.write(botter(question))
     
@@ -35,6 +36,13 @@ def main():
         if city_name:
             st.write(weather(city_name))
 
+def este():
+    tools = st.Page(page="tools.py", title="Tools", icon=":material/construction:")
+    links = st.Page(page="links.py", title="Links", icon=":material/link:")
+
+    pg = st.navigation(pages=[tools, links])
+    st.set_page_config(page_title="Daniel's abode", page_icon=":material/house:")
+    pg.run()
 
 if __name__ == "__main__":
-    main()
+    este()
