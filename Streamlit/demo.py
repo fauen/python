@@ -20,7 +20,7 @@ def main():
     st.header("Header")
     st.subheader("Subheader")
     st.write({"key": "value"})
-    st.write({"numbers": [0, 1, 2, 3, 4]})
+    st.write({"numbers": [0, 1, 2, 3, 4], "letters": ['A', 'B', 'C', 'D', 'E']})
     st.write([0, 1, 2, 3, 4])
     picture = st.camera_input("Smile")
     if picture:
