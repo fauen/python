@@ -42,6 +42,3 @@ def main():
             st.write(weather(city_name))
 
 main()
-
-if __name__ == "__main__":
-    main()

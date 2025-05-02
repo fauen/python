@@ -8,6 +8,3 @@ def main():
     st.sidebar.title("Sidebar")
 
 main()
-
-if __name__ == "__main__":
-    main()
