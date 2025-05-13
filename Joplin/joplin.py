@@ -1,7 +1,20 @@
 import requests as r
-from configparser import ConfigParser
-import os.path
-import os
+from dotenv import load_dotenv
+#from configparser import ConfigParser
+from os import getenv
+#import os.path
+#import os
+def config() -> str:
+    load_dotenv(".env")
+    joplin_token = getenv("TOKEN")
+    return joplin_token
+
+def main(token: str):
+    pass
+
+if __name__ == "__main__":
+    joplin_token = config()
+    main(joplin_token)
 
 config = ConfigParser()
 
