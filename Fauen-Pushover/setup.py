@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
 
 setup(
-        name = "Fauen.Pushover",
-        version = "0.1.0",
+        name = "Fauen-Pushover",
+        version = "0.0.6",
         description = "Used for the Pushover notification service to send messages",
         author = "Daniel Bäckman",
         author_email = "daniel@backman.io",
