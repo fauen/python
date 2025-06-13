@@ -20,7 +20,6 @@ def main():
     weather_data = api.location_data(location)
     
     print(weather_data)
-    print(WeatherInfo())
     
 
 if __name__ == "__main__":
