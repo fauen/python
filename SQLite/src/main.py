@@ -45,18 +45,14 @@ def main(args):
     connection.close()
 
 if __name__ == "__main__":
-    try:
-        # Create the parser
-        parser = argparse.ArgumentParser(description="Create a database file or keep it in memory.")
+    # Create the parser
+    parser = argparse.ArgumentParser(description="Create a database file or keep it in memory.")
 
-        # Add arguments
-        parser.add_argument('-n', '--name', type=str, required=True, help="Input name of user to be added to the database.")
-        parser.add_argument('-a', '--age', type=int, required=False, help="Input the age of user.")
-        parser.add_argument('-f', '--file', type=str, required=False, help="Input name of database. If not the database will be ran in memory.")
-        args = parser.parse_args()
+    # Add arguments
+    parser.add_argument('-n', '--name', type=str, required=True, help="Input name of user to be added to the database.")
+    parser.add_argument('-a', '--age', type=int, required=False, help="Input the age of user.")
+    parser.add_argument('-f', '--file', type=str, required=False, help="Input name of database. If not the database will be ran in memory.")
+    args = parser.parse_args()
 
-        # Parse the arguments
-        main(args)
-    except:
-        #parser.print_help()
-        print("oops")
+    # Parse the arguments
+    main(args)
