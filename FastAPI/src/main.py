@@ -1,15 +1,26 @@
 from fastapi import FastAPI
-import uvicorn
+import requests as r
 
-app = FastAPI()
+api = FastAPI()
 
-@app.get('/')
+@api.get('/')
 def page():
-    return {"message": "Main page..."}
+    return {"message": "Hello, World!"}
 
-@app.get('/api/greet')
+@api.get('/api/greet/')
 def greet():
-    return {"message": "Hello there!"}
+    return {"message": "Hello!"}
 
-if __name__ == "__main__":
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+@api.get('/api/greet/{name}')
+def greet_person(name: str):
+    return {"message": f"Hello there {name}!"}
+
+@api.get('/api/weather/{location}')
+def weather(location: str):
+    url = f"https://wttr.in/{location}"
+    response = r.get(url = url)
+    return response.text
+
+
+#if __name__ == "__main__":
+#    uvicorn.run(app, host="127.0.0.1", port=8000)
