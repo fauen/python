@@ -1,4 +1,4 @@
-# nanolearning
+# Logo.dev
 
 ## Synopsis
 Get company logo.
