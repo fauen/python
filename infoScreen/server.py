@@ -41,22 +41,10 @@ CLIENT_SECRET = os.environ["AZURE_CLIENT_SECRET"]
 
 PORT = 8888
 
-GROUPS = [
-    {
-        "name": "GROUP 1",
-        "rooms": [
-            {"email": "ROOM_EMAIL", "name": "DISPLAY NAME"},
-            {"email": "ROOM_EMAIL",  "name": "DISPLAY NAME"},
-        ],
-    },
-    {
-        "name": "GROUP 2",
-        "rooms": [
-            {"email": "ROOM_EMAIL", "name": "DISPLAY NAME"},
-            {"email": "ROOM_EMAIL",  "name": "DISPLAY NAME"},
-        ],
-    },
-]
+_config_path = os.path.join(os.path.dirname(__file__), "config.json")
+with open(_config_path) as _f:
+    _config = json.load(_f)
+GROUPS = _config["groups"]
 
 ROOMS = [r for g in GROUPS for r in g["rooms"]]
 

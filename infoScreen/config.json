@@ -1,0 +1,18 @@
+{
+  "groups": [
+    {
+      "name": "GROUP 1",
+      "rooms": [
+        {"email": "ROOM_EMAIL", "name": "DISPLAY NAME"},
+        {"email": "ROOM_EMAIL", "name": "DISPLAY NAME"}
+      ]
+    },
+    {
+      "name": "GROUP 2",
+      "rooms": [
+        {"email": "ROOM_EMAIL", "name": "DISPLAY NAME"},
+        {"email": "ROOM_EMAIL", "name": "DISPLAY NAME"}
+      ]
+    }
+  ]
+}
