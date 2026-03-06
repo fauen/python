@@ -42,7 +42,7 @@ CLIENT_SECRET = os.environ["AZURE_CLIENT_SECRET"]
 PORT = 8888
 
 _config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "config.json")
-with open(_config_path) as _f:
+with open(_config_path, encoding="utf-8-sig") as _f:
     _config = json.load(_f)
 GROUPS = _config["groups"]
 
