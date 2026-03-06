@@ -4,7 +4,7 @@ from pathlib import Path
 
 from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget, QHBoxLayout
 from PyQt6.QtWebEngineWidgets import QWebEngineView
-from PyQt6.QtWebEngineCore import QWebEngineSettings
+from PyQt6.QtWebEngineCore import QWebEngineSettings, QWebEngineScript, QWebEngineProfile, QWebEnginePage
 from PyQt6.QtCore import QUrl, Qt
 from PyQt6.QtGui import QShortcut, QKeySequence
 
@@ -24,13 +24,36 @@ def load_config() -> dict:
         return json.load(f)
 
 
-def make_view(url: str) -> QWebEngineView:
+NO_SCROLLBAR_CSS = """
+(function() {
+    var style = document.createElement('style');
+    style.textContent = '::-webkit-scrollbar { display: none; } * { scrollbar-width: none; }';
+    document.documentElement.appendChild(style);
+})();
+"""
+
+
+def _add_no_scrollbar_script(page: QWebEnginePage) -> None:
+    script = QWebEngineScript()
+    script.setName("no-scrollbar")
+    script.setSourceCode(NO_SCROLLBAR_CSS)
+    script.setInjectionPoint(QWebEngineScript.InjectionPoint.DocumentReady)
+    script.setWorldId(QWebEngineScript.ScriptWorldId.MainWorld)
+    script.setRunsOnSubFrames(True)
+    page.scripts().insert(script)
+
+
+def make_view(url: str, profile: QWebEngineProfile | None = None) -> QWebEngineView:
     view = QWebEngineView()
+    if profile is not None:
+        page = QWebEnginePage(profile, view)
+        view.setPage(page)
     settings = view.settings()
     settings.setAttribute(QWebEngineSettings.WebAttribute.JavascriptEnabled, True)
     settings.setAttribute(QWebEngineSettings.WebAttribute.LocalStorageEnabled, True)
     settings.setAttribute(QWebEngineSettings.WebAttribute.FullScreenSupportEnabled, True)
     view.setContextMenuPolicy(Qt.ContextMenuPolicy.NoContextMenu)
+    _add_no_scrollbar_script(view.page())
     view.load(QUrl(url))
     return view
 
@@ -46,7 +69,14 @@ class SplitScreenWindow(QMainWindow):
         layout.setContentsMargins(0, 0, 0, 0)
         layout.setSpacing(0)
 
-        layout.addWidget(make_view(left_url), stretch=1)
+        profile_dir = str(Path(__file__).parent / "profiles" / "left")
+        left_profile = QWebEngineProfile("left", self)
+        left_profile.setPersistentStoragePath(profile_dir)
+        left_profile.setPersistentCookiesPolicy(
+            QWebEngineProfile.PersistentCookiesPolicy.ForcePersistentCookies
+        )
+
+        layout.addWidget(make_view(left_url, left_profile), stretch=1)
         layout.addWidget(make_view(right_url), stretch=1)
 
         QShortcut(QKeySequence("Escape"), self, self.close)
