@@ -295,10 +295,10 @@ def build_page() -> str:
       <div class="branding">bookbeat</div>
       <h1>Meeting rooms</h1>
     </div>
-    <div class="clock">
+    <!-- <div class="clock">
       <div class="time">{time_str}</div>
       <div class="date">{date_str}</div>
-    </div>
+    </div> -->
   </header>
   {sections}
 </body>
