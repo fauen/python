@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import random
 
 # Seed numbers based on minecraft wiki for bedrock edition.
